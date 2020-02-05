@@ -183,7 +183,7 @@ IPython.display.Audio(y, rate=Fs)
 
 
 # Q7 Investiga cuál es la frecuencia de muestreo estandar para el DVD (audio) y úsala para el siguiente ejercicio
-Fs = # RESPUETA
+#Fs = # RESPUETA
 
 
 # In[ ]:
