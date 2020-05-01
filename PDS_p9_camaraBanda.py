@@ -12,23 +12,49 @@ fs, x = wv.read('./audios/HolaMundo.wav')
 #2
 n = len(x)
 t = np.linspace(0,np.round(n/fs),n)
+plt.xlabel('tiempo')
+plt.ylabel('Amplitud')
 plt.plot(t,x)
+
 
 #4
 plt.figure()
-plt.specgram(x[:,1],NFFT = 1024,Fs=fs, sides='onesided' )
-plt.ylabel('Frequency [Hz]')
-plt.xlabel('Time [sec]')
-#plt.show()
+plt.specgram(x[:,1],NFFT = 2048,Fs=fs, sides='onesided' )
+plt.ylabel('Normalized Frequency')
+plt.xlabel('Samples')
+
 
 
 #5
-f, t, Sxx = signal.spectrogram(x, fs,window=('hamming',1024),return_onesided=True)
+spectrum, freqs, t, im = plt.specgram(x[:,1],NFFT = 2048,Fs=fs, sides='onesided')
 
+#o
+plt.figure()
+plt.title('transiente O')
+plt.xlabel('Frecuencia')
+plt.ylabel('Amplitud')
+plt.plot(spectrum[160])
 
-#print(f)
-#print(t)
-#print(Sxx)
+#a
+plt.figure()
+plt.title('transiente A')
+plt.xlabel('Frecuencia')
+plt.ylabel('Amplitud')
+plt.plot(spectrum[230])
 
+#u
+plt.figure()
+plt.title('transiente U')
+plt.xlabel('Frecuencia')
+plt.ylabel('Amplitud')
+plt.plot(spectrum[332])
 
+#o
+plt.figure()
+plt.title('transiente O')
+plt.xlabel('Frecuencia')
+plt.ylabel('Amplitud')
+plt.plot(spectrum[436])
+
+plt.show()
 
