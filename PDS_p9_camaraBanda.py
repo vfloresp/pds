@@ -7,7 +7,7 @@ from scipy import signal
 from scipy.io import wavfile as wv
 
 #1
-fs, x = wv.read('./audios/HolaMundo.wav')
+fs, x = wv.read('./proyecto_final/audios/PDS_1.wav')
 
 #2
 n = len(x)

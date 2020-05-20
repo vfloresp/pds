@@ -22,7 +22,7 @@ w, h = scipy.signal.freqz([0] + -1*a[1:], [1],n)
 FFT = scipy.fftpack.fft(x)
 plt.figure()
 plt.plot(w,h,'C1')
-plt.plot(w,FFT,'g')
+#plt.plot(w,FFT,'g')
 
 
 
