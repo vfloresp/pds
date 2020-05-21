@@ -9,6 +9,12 @@ from pydub.silence import split_on_silence
 import os, shutil
 from scipy.io import wavfile as wv
 from scikit_param import X, Y
+#mport sys
+
+#sys.path.append('/snap/bin/ffmpeg')
+
+#AudioSegment.converter = "/snap/bin/ffmpeg"
+#AudioSegment.ffmpeg = "/snap/bin/ffmpeg"
 
 #separa la frase en palabras
 def frase_palabras(filePath):
@@ -31,7 +37,7 @@ def frase_palabras(filePath):
 def palabra(directorio):
     global X,Y
     words = ''
-    neigh = RadiusNeighborsClassifier(radius=1.0)
+    neigh = RadiusNeighborsClassifier(radius=0.12)
     neigh.fit(X, Y)
     for filename in os.listdir(directorio):
         word = ' '
@@ -46,6 +52,7 @@ def palabra(directorio):
                         print(point)
                         val = neigh.predict([point])
                         char = valores(val[0])
+                        print(char)
                         if word[-1] != char:
                             word = word + char
                     except:

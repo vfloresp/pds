@@ -35,7 +35,7 @@ def calcFormantes(directorio,asignacion):
 def findForm(freq,signal):
     aux = 0
     MaxMin = 0
-    i = 50000
+    i = 25000
     max = 0
     tupla = [0,0]
     if signal[i+1] < signal[i]:
