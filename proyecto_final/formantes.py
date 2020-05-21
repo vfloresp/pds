@@ -27,25 +27,39 @@ def calcFormantes(directorio,asignacion):
         y = scipy.signal.lfilter([1],[1,0.63],mult)
         a = lc.lpc(y,12)
         w, h = scipy.signal.freqz([0] + -1*a[1:], [1],n)
-        plt.plot(w,h)
-        aux = 0
-        i = 0
-        max = 0
-        tupla = [0,0]
-        while(aux<2 and i<len(h)):
-            if(h[i]>max):
-                max = h[i]
+        tupla = findForm(w,h)
+        if tupla[0]!=0 and tupla[1]!=0:    
+            X.append(tupla)
+            Y.append(asignacion)
+
+def findForm(freq,signal):
+    aux = 0
+    MaxMin = 0
+    i = 50000
+    max = 0
+    tupla = [0,0]
+    if signal[i+1] < signal[i]:
+        MaxMin = 1
+    while(aux<2 and i<len(signal)):
+        if MaxMin==0:
+            if(signal[i]>max):
+                max = signal[i]
             else:
-                tupla[aux] = np.real(h[i]*10000)
+                tupla[aux] = np.real(freq[i])
                 aux = aux+1
-                X.append(tupla)
-                Y.append(asignacion)
-            i = i+1
+                MaxMin = 1
+        else:
+            if max < signal[i]:
+                MaxMin=0
+            max = signal[i]
+        i = i+1
+    return tupla
     
 
 calcFormantes('./audios/A','A')
 print(X)
 print(Y)
+
 #calcFormantes('./audios/E')
 #calcFormantes('./audios/I')
 #calcFormantes('./audios/O')
