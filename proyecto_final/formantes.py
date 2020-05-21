@@ -18,8 +18,8 @@ def calcFormantes(directorio,asignacion):
     for filename in os.listdir(directorio):
         global X
         global Y
-        plt.figure()
-        plt.title(filename)
+        #plt.figure()
+        #plt.title(filename)
         fs, x = wv.read(directorio+'/'+filename)
         n = len(x)
         ham = scipy.signal.hamming(n)
@@ -56,12 +56,15 @@ def findForm(freq,signal):
     return tupla
     
 
-calcFormantes('./audios/A','A')
-print(X)
-print(Y)
+calcFormantes('./audios/A',0)
+calcFormantes('./audios/E',1)
+calcFormantes('./audios/I',2)
+calcFormantes('./audios/O',3)
+calcFormantes('./audios/U',4)
+#plt.show()
 
-#calcFormantes('./audios/E')
-#calcFormantes('./audios/I')
-#calcFormantes('./audios/O')
-#calcFormantes('./audios/U')
-plt.show()
+f = open("scikit_param.py","w+")
+f.write("#Python 3 \n")
+f.write("#Valores calculados de la base de datos en formato para scikit \n")
+f.write("X = "+str(X)+"\n")
+f.write("Y = "+str(Y)+"\n")

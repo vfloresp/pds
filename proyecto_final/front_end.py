@@ -35,9 +35,8 @@ bA = tk.Button(window,text="seleccionar", command = open_file)
 bA.grid(row=0,column=7,padx=10,pady=10)
 
 #crear grabacion de audio
-def record_file():
+def record_file(seconds):
     fs = 44100  # Sample rate
-    seconds = 10  # Duration of recording
     myrecording = sd.rec(int(seconds * fs), samplerate=fs, channels=2)
     sd.wait()  # Wait until recording is finished
     write('./audios/recorded.wav', fs, myrecording)  # Save as WAV file
@@ -48,9 +47,14 @@ def record_file():
 
 def popUp():
     pop = tk.Toplevel()
-    lG = tk.Label(pop,text="Grabando...")
-    lG.grid(row=3,column=3,padx=30,pady=30)
-    record_file()
+    lG = tk.Label(pop,text="¿Cuantos segundos desea grabar?")
+    lG.grid(row=3,column=3,padx=30,pady=20)
+    eG = tk.Entry(pop)
+    eG.grid(row=4,column=3,columnspan=2,padx=10,pady=10)
+    eG.config(width=40)
+    bG2 = tk.Button(pop,text="Grabar", command = lambda: record_file(int(eG.get())))
+    bG2.grid(row=5,column=3,padx=10,pady=10)
+
 
 bG = tk.Button(window,text="Grabar", command = popUp)
 bG.grid(row=1,column=7,padx=10,pady=0)
@@ -60,17 +64,21 @@ def convertir():
     nameT,nameE = frase(audio)
 
     global imgT
+    LIT['image']=''
     original = Image.open(nameT)
     resized = original.resize((330, 330),Image.ANTIALIAS)
     imgT = ImageTk.PhotoImage(resized)
     LIT['image']=imgT
     global imgE
+    LIE['image']=''
     original = Image.open(nameE)
     resized = original.resize((330, 330),Image.ANTIALIAS)
     imgE = ImageTk.PhotoImage(resized)
     LIE['image']=imgE
 
-    frase_palabras(audio)
+    respuesta = frase_palabras(audio)
+    L1.delete(0,tk.END)
+    L1.insert(0,respuesta)
 
 bI = tk.Button(window,text='Convertir', command=convertir)
 bI.grid(row=3,column=7,padx=20,pady=35)
