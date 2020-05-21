@@ -40,7 +40,7 @@ def palabra(directorio):
         if((n/fs)>0.5):
             spectrum, freqs, t, im = plt.specgram(x[:,1],NFFT = 1024,Fs=fs, sides='onesided')
             for i in range(len(spectrum)):
-                point = findForm(np.linspace(0,2.4,len(spectrum[i])),spectrum[i])
+                point = findForm(np.linspace(0,freqs[len(spectrum[i])]/1000,len(spectrum[i])),spectrum[i])
                 if point[0]!= 0 and point[1] != 0:
                     try:
                         print(point)

@@ -52,7 +52,7 @@ def popUp():
     eG = tk.Entry(pop)
     eG.grid(row=4,column=3,columnspan=2,padx=10,pady=10)
     eG.config(width=40)
-    bG2 = tk.Button(pop,text="Grabar", command = lambda: record_file(int(eG.get())))
+    bG2 = tk.Button(pop,text="Grabar", command = lambda:[record_file(int(eG.get())),pop.after(int(eG.get())*1000,pop.destroy) ])
     bG2.grid(row=5,column=3,padx=10,pady=10)
 
 
