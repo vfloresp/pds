@@ -136,3 +136,6 @@ dmypy.json
 
 #files
 *.docx
+
+#video
+*.mp4
